@@ -8,31 +8,38 @@ module.exports = {
     role: 0,
   },
 
-  onStart: async function({ api, event, args }) {
+  onStart: async function ({ api, event, args }) {
     const city = args.join(" ");
-
+    if (!city) {
+      return api.sendMessage(
+        "⚠️ Please provide a city name to fetch the prayer schedule. Example: namaz Dhaka",
+        event.threadID,
+        event.messageID
+      );
+    }
+    
     try {
       const response = await axios.get(
         `https://xnilnew404.onrender.com/xnil/namaz?city=${encodeURIComponent(city)}&country=Bangladesh`
       );
-
+      
       const res = response.data;
-
+      
       const message = `
-╭─━━━━━❰ 🌙 নামাজের সময়সূচী ❱━━━━━─╮
+╭─━━━━━❰ 🌙 Prayer Schedule ❱━━━━━─╮
   
-📅 তারিখ: ${res.date}
-📍 স্থান: ${res.city}, ${res.country.trim()}
+📅 Date: ${res.date}
+📍 Location: ${res.city}, ${res.country.trim()}
 
-🕌 ফজর:      ${res.timings.Fajr}
-🕌 যোহর:     ${res.timings.Dhuhr}
-🕌 আসর:      ${res.timings.Asr}
-🕌 মাগরিব:   ${res.timings.Maghrib}
-🕌 এশা:      ${res.timings.Isha}
+🕌 Fajr:      ${res.timings.Fajr}
+🕌 Dhuhr:     ${res.timings.Dhuhr}
+🕌 Asr:       ${res.timings.Asr}
+🕌 Maghrib:   ${res.timings.Maghrib}
+🕌 Isha:      ${res.timings.Isha}
 
 ╰─━━━━━━━━━━━━━━━━━━━━━─╯
       `;
-
+      
       api.sendMessage(message, event.threadID, event.messageID);
     } catch (error) {
       api.sendMessage(
