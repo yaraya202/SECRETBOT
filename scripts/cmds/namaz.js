@@ -26,7 +26,7 @@ module.exports = {
       const res = response.data;
       
       const message = `
-╭─━━━━━❰ 🌙 Prayer Schedule ❱━━━━━─╮
+╭─━━❰ 🌙 Prayer Schedule ❱━━─╮
   
 📅 Date: ${res.date}
 📍 Location: ${res.city}, ${res.country.trim()}
