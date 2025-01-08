@@ -15,12 +15,14 @@ module.exports = {
 		envConfig: {}
 	},
 	onStart: async function ({ message }) {
-		const authorName = " ⩸ᗷᗩᎩᒍᏆᗞ⩸ ";
-		const ownAge = "『 ⩸__17__⩸ 』";
-		const messenger = "https://m.me/100065506668822";
-		const authorFB = "https://www.facebook.com/profile.php?id=BAYJID.500k";
-		const authorNumber = "_01638007072";
+		const authorName = " ⩸𝚇 𝙽 𝙸 𝙻⩸ ";
+		const ownAge = "『 ⩸__21+__⩸ 』";
+		const messenger = "https://m.me/100078794143432";
+		const authorFB = "https://www.facebook.com/xnil6x404";
+		const authorNumber = "_01818512416";
 		const Status = "⩸__🆂🅸🅽🅶🅻🅴__⩸";
+		const TG = "https://t.me/xnil6x";
+		const insta = "https://www.instagram.com/xnil6x";
 		const urls = [
 "https://i.imgur.com/I8JSUWI.jpeg",
 "https://i.imgur.com/I8JSUWI.jpeg",
@@ -28,7 +30,7 @@ module.exports = {
 "https://i.imgur.com/I8JSUWI.jpeg"
 ];
 		const link = urls[Math.floor(Math.random() * urls.length)];
-		const now = moment().tz('Asia/Jakarta');
+		const now = moment().tz('Asia/Dhaka');
 		const date = now.format('MMMM Do YYYY');
 		const time = now.format('h:mm:ss A');
 		const uptime = process.uptime();
@@ -39,23 +41,23 @@ module.exports = {
 		const uptimeString = `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
 
 		message.reply({
-			body: `💫《 ⩸__𝐁𝐨𝐭 𝐀𝐧𝐝 𝐎𝐰𝐧𝐞𝐫 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧__⩸ 》💫
+			body: `💫《 ⩸__𝐎𝐰𝐧𝐞𝐫 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧__⩸ 》💫\n
+\💙 OWNER NAME: ${authorName}
+\💥 Telegram: ${TG}
+\✅ Instagram: ${insta}
+\📝 AGE  : ${ownAge}
+\💕 RELATIONSHIP: ${Status}
+\🌐 WP : ${authorNumber}
+\🌍 FACEBOOK LINK : ${authorFB}
+\🔰 ANY HELP CONTACT :⩸__${messenger}__⩸\n
+
+💫《 ⩸__𝐁𝐨𝐭 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧__⩸ 》💫\n
 \🤖BOT NAME : ⩸__${global.GoatBot.config.nickNameBot}__⩸
 \👾BOT SYSTEM PREFIX : ${global.GoatBot.config.prefix}
-\💙 OWNER NAME: ${authorName}
-\📝AGE  : ${ownAge}
-\💕RELATIONSHIP: ${Status}
-\🌐WP : ${authorNumber}
-\🌍 FACEBOOK LINK : ${authorFB}
-\🗓DATE : ${date}
-\⏰NOW TIME : ${time}
-\🔰ANY HELP CONTACT :⩸__${messenger}__⩸
-\📛BOT I'S RUNNING FOR : ${uptimeString}
-    𝑻𝒈: https://t.me/MOHAMMADBAYJID
-    𝑰𝒏𝒔𝒕𝒂: https://www.instagram.com/mr_bayjid120?
-    𝑪𝒂𝒑𝑪𝒖𝒕: copy_bayjid
-    𝑻𝒊𝒌𝑻𝒐𝒌: https://www.tiktok.com/@copy_bayjid?
-    𝒀𝒐𝒖𝑻𝒖𝒃𝒆: https://youtube.com/@Bayjid Editz?
+\🗓 DATE : ${date}
+\⏰ NOW TIME : ${time}
+\📛 BOT I'S RUNNING FOR : ${uptimeString}
+
 \===============`,
 			attachment: await global.utils.getStreamFromURL(link)
 		});

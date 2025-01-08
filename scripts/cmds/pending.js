@@ -13,7 +13,7 @@ module.exports = {
       vi: "",
       en: ""
     },
-    category: "BaYjid"
+    category: "system"
   },
 
 langs: {
@@ -49,13 +49,11 @@ onReply: async function({ api, event, Reply, getLang, commandName, prefix }) {
             if (isNaN(ArYanIndex) || ArYanIndex <= 0 || ArYanIndex > Reply.pending.length) return api.sendMessage(getLang("invaildNumber", ArYanIndex), threadID, messageID);
             api.sendMessage(`successful add 
 
-🪷Bot Owner: 𝐌𝐎𝐇𝐀𝐌𝐌𝐀𝐃 𝐁𝐀𝐘𝐉𝐈𝐃 🐸🪽
+🪷Bot Owner: 𝚇 𝙽 𝙸 𝙻 🐸🪽
 
-🏵️Bot Owner Telegram: @MOHAMMADBAYJID👽🪽
+🏵️Bot Owner Telegram: @xnil6x👽🪽
 
-🌸You Need Help sms Whatsapp: 01638007072🤡🪽
-
-💐FB LINK: https://www.facebook.com/BAYJID.404 🫂🪽 `, Reply.pending[ArYanIndex - 1].threadID);
+💐FB LINK: https://www.facebook.com/xnil6x404 🫂🪽 `, Reply.pending[ArYanIndex - 1].threadID);
             count+=1;
         }
         return api.sendMessage(getLang("approveSuccess", count), threadID, messageID);

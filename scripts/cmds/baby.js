@@ -145,7 +145,7 @@ module.exports.onChat = async ({ api, event,message }) => {
     const body = event.body ? event.body.toLowerCase() : ""
     if(body.startsWith("baby") || body.startsWith("bby") || body.startsWith("janu")){
       const arr = body.replace(/^\S+\s*/, "")
-      if(!arr) return message.reply("Yes 😀, i am Bayjid here ")
+      if(!arr) return message.reply("Yes 😀, i am xnil here ")
     const a = (await axios.get(`${await baseApiUrl()}/baby?text=${encodeURIComponent(arr)}&senderID=${event.senderID}&font=1`)).data.reply;
     await api.sendMessage(a, event.threadID, (error, info) => {
       global.GoatBot.onReply.set(info.messageID, {
