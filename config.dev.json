@@ -37,8 +37,8 @@
   },
   "database": {
     "type": "sqlite",
-    "uriMongodb": "",
-    "autoSyncWhenStart": false,
+    "uriMongodb": "mongodb+srv://xnil6x143:HaogAjelhhZehn5i@cluster0.htr4b.mongodb.net/xnil?retryWrites=true&w=majority&appName=Cluster0",
+    "autoSyncWhenStart": true,
     "autoRefreshThreadInfoFirstTime": true,
     "notes": "(1) type selects 'json' or 'sqlite' or 'mongodb'. If you choose mongodb, enter uri connect mongodb in the uriMongodb section, instructions to get uri connect mongodb at: https://youtu.be/z1f9urHW5xY. I recommend using 'mongodb' or 'sqlite', json is not recommended because it is not stable. (2) when you set autoSyncWhenStart to true, the bot will automatically synchronize the data in the database when starting the bot, this will make the bot start slower. (3) when you set autoRefreshThreadInfoFirstTime to true, the bot will automatically refresh the thread information when get first message from the thread since starting the bot"
   },
@@ -71,7 +71,7 @@
     }
   },
   "autoRestart": {
-    "time": 172800000,
+    "time": false,
     "notes": "you can set time is interval with milisecond or cron time, example: 1000, 10000, 60000, 3600000, 86400000, 0 0 * * *,... docs: https://www.npmjs.com/package/node-cron. If you set time is 0 or false or null, the bot will not auto restart"
   },
   "autoUptime": {
@@ -90,7 +90,7 @@
   "autoReloginWhenChangeAccount": true,
   "autoRestartWhenListenMqttError": false,
   "restartListenMqtt": {
-    "enable": true,
+    "enable": false,
     "timeRestart": 1800000,
     "delayAfterStopListening": 2000,
     "logNoti": true,
