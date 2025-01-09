@@ -1,72 +1,69 @@
 const axios = require("axios");
-const fs = require("fs");
-const path = require("path");
+const fs = require("fs-extra");
 
 module.exports = {
   config: {
     name: "tiktok",
-    version: "2.0",
-    author: "kshitiz",
-    countDown: 20,
+    version: "1.0",
+    author: "xnil6x",
+    countDown: 5,
     role: 0,
-    shortDescription: "Search for TikTok videos",
-    longDescription: {
-      en: "Search for TikTok videos based on keywords."
+    shortDescription: {
+      en: "Fetch TikTok video based on category."
     },
-    category: "info",
+    longDescription: {
+      en: "Downloads and sends a TikTok video based on the provided category."
+    },
+    category: "Entertainment",
     guide: {
-      en: "{pn} <search text>"
+      en: "{pn} <category>\n\nExample: /tiktok sad"
     }
   },
 
-  onStart: async function ({ api, event, args, message }) {
-    const searchQuery = args.join(" ");
+  onStart: async function ({ api, event, args }) {
+    const { threadID, messageID } = event;
+    const query = args.join(" ");
 
-    if (!searchQuery) {
-      api.sendMessage("Usage: {pn} <search text>", event.threadID);
-      return;
+    if (!query) {
+      return api.sendMessage("❌ Usage: {pn} <search text>", threadID, messageID);
     }
 
     let searchMessageID;
 
-    api.sendMessage("Searching, please wait...", event.threadID, (err, messageInfo) => {
+    api.sendMessage("Searching, please wait...", threadID, (err, messageInfo) => {
       searchMessageID = messageInfo.messageID;
     });
 
     try {
-      const apiUrl = `https://hiroshi.hiroshiapi.repl.co/tiktok/searchvideo?keywords=${encodeURIComponent(searchQuery)}`;
-
+      const apiUrl = `https://www.tikwm.com/api/feed/search?keywords=${encodeURIComponent(query)}`;
       const response = await axios.get(apiUrl);
       const videos = response.data.data.videos;
 
       if (!videos || videos.length === 0) {
-        api.sendMessage("No TikTok videos found for your query.", event.threadID);
-      } else {
-        const videoData = videos[0];
-        const videoUrl = videoData.play;
-        const message = `Posted by: ${videoData.author.unique_id}`;
-        const filePath = path.join(__dirname, `/cache/tiktok_video.mp4`);
-        const writer = fs.createWriteStream(filePath);
-
-        const videoResponse = await axios({ method: 'get', url: videoUrl, responseType: 'stream' });
-        videoResponse.data.pipe(writer);
-
-        writer.on('finish', async () => {
-          
-          await api.sendMessage({
-            body: message,
-            attachment: fs.createReadStream(filePath)
-          }, event.threadID, event.messageID);
-          fs.unlinkSync(filePath);
-
-          if (searchMessageID) {
-            api.unsendMessage(searchMessageID);
-          }
-        });
+        return api.sendMessage(
+          `❌ No TikTok videos found for category "${query}".`,
+          threadID,
+          messageID
+        );
       }
+
+      const randomIndex = Math.floor(Math.random() * videos.length);
+      const videoData = videos[randomIndex];
+      const videoUrl = videoData.wmplay;
+      const videoTitle = videoData.title;
+
+      api.sendMessage({
+        body: `🎥 Title: ${videoTitle}`,
+        attachment: await global.utils.getStreamFromURL(videoUrl)
+      }, threadID, messageID);
+
+      if (searchMessageID) {
+        api.unsendMessage(searchMessageID);
+      }
+
     } catch (error) {
-      console.error('Error:', error);
-      api.sendMessage("An error occurred while processing the request.", event.threadID);
+      api.sendMessage("❌ An error occurred while processing the request.", threadID, messageID);
+
       if (searchMessageID) {
         api.unsendMessage(searchMessageID);
       }
